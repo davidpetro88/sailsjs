@@ -9,6 +9,7 @@ module.exports = {
 	index: function (req,res,next) {
         Blog.find()
             .exec(function(err, result) {
+                console.log(result);
                 return res.view('blog/list',{
                     data: result
                 });
@@ -24,6 +25,40 @@ module.exports = {
             .exec(function (err, result) {
                 return res.redirect('/posts');
             });
+    },
+    show: function (req, res, next) {
+        Blog.findOne({
+            id: req.params.id
+        }).exec(function (err, result) {
+            return res.view('blog/show',{
+                data: result,
+                title: 'Show'
+            });
+        });
+    },
+    edit: function (req, res, next) {
+        Blog.findOne({
+            id: req.params.id
+        }).exec(function (err, result) {
+            return res.view('blog/edit',{
+                data: result,
+                title: 'Edit'
+            });
+        });
+    },
+    update: function (req, res, next) {
+        Blog.update({
+            id: req.params.id
+        }, req.body).exec(function (err, result) {
+            return res.redirect('/posts');
+        });
+    },
+    destroy: function (req, res, next) {
+        Blog.destroy({
+            id: req.params.id
+        }).exec(function (err) {
+            return res.redirect('/posts');
+        });
     }
 };
 

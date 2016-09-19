@@ -54,6 +54,22 @@ module.exports.routes = {
   'POST /posts':{
     controller: 'BlogController',
     action: 'create'
+  },
+  'GET /posts/:id':{
+    controller: 'BlogController',
+    action: 'show'
+  },
+  'GET /posts/edit/:id':{
+    controller: 'BlogController',
+    action: 'edit'
+  },
+  'POST /posts/edit/:id':{
+    controller: 'BlogController',
+    action: 'update'
+  },
+  'DELETE /posts/:id':{
+    controller: 'BlogController',
+    action: 'destroy'
   }
 
   /***************************************************************************
